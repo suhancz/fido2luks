@@ -34,12 +34,13 @@ mkdir -p %{buildroot}
 make -f .copr/Makefile install root=%{buildroot}
 install -Dm 755 -d dracut/96luks-2fa %{buildroot}/%{_prefix}/lib/dracut/modules.d/96luks-2fa
 install -Dm 644 dracut/96luks-2fa/fido2luks.conf %{buildroot}/%{_prefix}/lib/dracut/modules.d/96luks-2fa/fido2luks.conf
-install -Dm 755 dracut/96luks-2fa/luks-2fa-generator.sh %{buildroot}/%{_prefix}/lib/dracut/modules.d/96luks-2fa/luks-2fa-generator.sh
-install -Dm 644 dracut/96luks-2fa/luks-2fa.target %{buildroot}/%{_prefix}/lib/dracut/modules.d/96luks-2fa/luks-2fa.target
+install -Dm 644 dracut/96luks-2fa/keyscript.sh %{buildroot}/%{_prefix}/lib/dracut/modules.d/96luks-2fa/keyscript.sh
 install -Dm 755 dracut/96luks-2fa/module-setup.sh %{buildroot}/%{_prefix}/lib/dracut/modules.d/96luks-2fa/module-setup.sh
 install -Dm 644 dracut/dracut.conf.d/luks-2fa.conf %{buildroot}/%{_sysconfdir}/dracut.conf.d/luks-2fa.conf
 install -Dm 644 dracut/dracut.conf.d/luks-2fa.conf %{buildroot}/%{_prefix}/lib/dracut/dracut.conf.d/luks-2fa.conf
 install -Dm 644 initramfs-tools/fido2luks.conf %{buildroot}/%{_sysconfdir}/fido2luks.conf
+install -Dm 755 pam_mount/fido2luksmounthelper.sh %{buildroot}/usr/bin/fido2luksmounthelper.sh
+install -Dm 644 fido2luks.bash %{buildroot}/%{_sysconfdir}/bash_completion.d/fido2luks
 
 %clean
 rm -rf %{buildroot}
@@ -47,15 +48,15 @@ rm -rf %{buildroot}
 %files
 %attr(0775, root, root) "%{_bindir}/fido2luks"
 %attr(0644, root, root) "%{_prefix}/lib/dracut/modules.d/96luks-2fa/fido2luks.conf"
-%attr(0775, root, root) "%{_prefix}/lib/dracut/modules.d/96luks-2fa/luks-2fa-generator.sh"
-%attr(0644, root, root) "%{_prefix}/lib/dracut/modules.d/96luks-2fa/luks-2fa.target"
 %attr(0775, root, root) "%{_prefix}/lib/dracut/modules.d/96luks-2fa/module-setup.sh"
 %attr(0644, root, root) "%{_prefix}/lib/dracut/dracut.conf.d/luks-2fa.conf"
+%attr(0775, root, root) "%{_prefix}/lib/dracut/modules.d/96luks-2fa/keyscript.sh"
+%attr(0775, root, root) "%{_bindir}/fido2luksmounthelper.sh"
 %config(noreplace) "%{_sysconfdir}/dracut.conf.d/luks-2fa.conf"
 %config(noreplace) "%{_sysconfdir}/fido2luks.conf"
+%config(noreplace) "%{_sysconfdir}/bash_completion.d/fido2luks"
 %doc README.md
 
 %changelog
 * Wed Nov 18 2020 Akos Balla <akos.balla@sirc.hu>
 - create RPM spec (akos.balla@sirc.hu)
-
