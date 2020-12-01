@@ -39,7 +39,7 @@ install -Dm 755 dracut/96luks-2fa/module-setup.sh %{buildroot}/%{_prefix}/lib/dr
 install -Dm 644 dracut/dracut.conf.d/luks-2fa.conf %{buildroot}/%{_sysconfdir}/dracut.conf.d/luks-2fa.conf
 install -Dm 644 dracut/dracut.conf.d/luks-2fa.conf %{buildroot}/%{_prefix}/lib/dracut/dracut.conf.d/luks-2fa.conf
 install -Dm 644 initramfs-tools/fido2luks.conf %{buildroot}/%{_sysconfdir}/fido2luks.conf
-install -Dm 755 pam_mount/fido2luksmounthelper.sh %{buildroot}/usr/bin/fido2luksmounthelper.sh
+install -Dm 755 pam_mount/fido2luksmounthelper.sh %{buildroot}/%{_bindir}/fido2luksmounthelper.sh
 install -Dm 644 fido2luks.bash %{buildroot}/%{_sysconfdir}/bash_completion.d/fido2luks
 
 %clean
